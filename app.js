@@ -127,9 +127,9 @@ addEventListener('touchend', e => {
   if (dx < -60) next(); else if (dx > 60) prev();
 });
 
-fetch('quotes.json').then(r => r.json()).then(q => {
+(q => {
   QUOTES = q; drawFavs();
   const n = parseInt(new URLSearchParams(location.search).get('q'), 10);
   const i = n >= 1 && n <= q.length ? n - 1 : Math.floor(Math.random() * q.length);
   trail = [i]; cur = 0; render(i);
-});
+})(window.QUOTES);

@@ -2,7 +2,7 @@
 
 A calm, beautiful random quote generator — **[live demo](https://tungbt-quote.netlify.app/)**.
 
-- 1,680 hand-picked quotes (deduplicated from [Database-Quotes-JSON](https://github.com/JamesFT/Database-Quotes-JSON))
+- 1,680 hand-picked quotes (deduplicated from [Database-Quotes-JSON](https://github.com/JamesFT/Database-Quotes-JSON), in `quotes.js`)
 - Word-by-word reveal, aurora background whose mood changes with every quote
 - History (back/forward), save favourites, copy, share (Web Share API or X)
 - Deep links: `?q=421` opens a specific quote
