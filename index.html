@@ -1,60 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Get inspired with our Random Quote Generator! Click for instant motivation and wisdom. Enjoy a daily dose of uplifting quotes."
-    />
-    <title>TungDaDev Quotes Random</title>
-    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-    <!-- Google-fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Ysabeau+Office:wght@1;100;200;300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="./css/all.min.css" />
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="./css/bootstrap.min.css" />
-    <!-- Main Css -->
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
-  <body>
-    <main
-      id="home"
-      class="home d-flex justify-content-center align-items-center"
-    >
-      <div class="container">
-        <div class="card text-center adjust-content p-3 p-sm-5">
-          <i class="fa-solid fa-quote-left"></i>
-          <div
-            class="card-body d-flex flex-column justify-content-center align-items-center gap-3"
-          >
-            <h1>Quote of the day</h1>
-            <blockquote class="blockquote mb-0 mt-2">
-              <!-- <p id="quote">click on the button below to get a quote</p> -->
-              <p id="quote"></p>
-              <footer id="author"></footer>
-            </blockquote>
-            <button
-              type="button"
-              onclick="newQuote();"
-              class="btn btn-main px-4 mb-4"
-              title="Get a random quote"
-            >
-              New Quote
-            </button>
-          </div>
-          <i class="fa-solid fa-quote-right"></i>
-        </div>
-      </div>
-    </main>
-    <!-- Js -->
-    <script src="./js/bootstrap.bundle.js"></script>
-    <script src="./js/main.js"></script>
-  </body>
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Quotes — a little wisdom, one tap away</title>
+  <meta name="description" content="A calm, beautiful random quote generator. 1,680 hand-picked quotes. Save your favourites, copy and share in one tap.">
+  <meta name="theme-color" content="#0b0b12">
+  <meta property="og:title" content="Quotes — a little wisdom, one tap away">
+  <meta property="og:description" content="1,680 hand-picked quotes. Save, copy and share in one tap.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>try{const t=localStorage.getItem('q-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.dataset.theme='light'}catch(e){}</script>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="brand" href="./" aria-label="Quotes home"><span class="mark">“</span>quotes<span class="dot">.</span></a>
+    <div class="top-right">
+      <span class="counter" id="counter" aria-hidden="true">—</span>
+      <button class="icon-btn" id="favs-btn" aria-label="Open saved quotes" title="Saved (F)">
+        <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <span class="badge" id="fav-count" hidden>0</span>
+      </button>
+      <button class="icon-btn" id="theme-btn" aria-label="Toggle light and dark theme" title="Theme (T)">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <figure class="quote" id="quote" aria-live="polite">
+      <blockquote id="text"></blockquote>
+      <figcaption><span class="line"></span><span id="author"></span></figcaption>
+    </figure>
+  </main>
+
+  <nav class="dock" aria-label="Quote actions">
+    <button class="icon-btn" id="prev-btn" aria-label="Previous quote" title="Previous (←)" disabled>
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="icon-btn" id="like-btn" aria-label="Save quote" aria-pressed="false" title="Save (L)">
+      <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+    </button>
+    <button class="primary" id="next-btn" title="New quote (Space)">
+      <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 3v6h-6"/></svg>
+      <span>New quote</span><kbd>Space</kbd>
+    </button>
+    <button class="icon-btn" id="copy-btn" aria-label="Copy quote" title="Copy (C)">
+      <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    </button>
+    <button class="icon-btn" id="share-btn" aria-label="Share quote" title="Share (S)">
+      <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v14"/></svg>
+    </button>
+  </nav>
+
+  <p class="hint" aria-hidden="true"><kbd>Space</kbd> new · <kbd>←</kbd> back · <kbd>L</kbd> save · <kbd>C</kbd> copy</p>
+
+  <aside class="drawer" id="drawer" aria-label="Saved quotes" aria-hidden="true">
+    <div class="drawer-head">
+      <h2>Saved <span id="drawer-count"></span></h2>
+      <button class="icon-btn" id="close-btn" aria-label="Close saved quotes">
+        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <ul id="fav-list"></ul>
+    <p class="empty" id="fav-empty">Nothing saved yet. Tap <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg> on a quote you love.</p>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="toast" id="toast" role="status"></div>
+
+  <footer class="foot">made with care by <a href="https://www.tungdadev.com/">TungDaDev</a></footer>
+  <script src="app.js"></script>
+</body>
 </html>
