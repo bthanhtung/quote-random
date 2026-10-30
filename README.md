@@ -42,7 +42,7 @@ cd quote-random
 npx serve .        # or simply open index.html
 ```
 
-To add your own quotes, append `{ quote, author }` entries to `quotes.js`.
+To add your own quotes, append `["Quote text", "Author"]` entries to `window.QUOTES` in `quotes.js`.
 
 ## License
 
